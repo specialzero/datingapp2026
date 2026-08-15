@@ -10,7 +10,6 @@ namespace API.Controllers
     {
         
         [HttpGet]
-        [Authorize]
         public async Task<ActionResult<IReadOnlyList<AppUser>>> GetMembers()
         {
             var members = await context.AppUsers.ToListAsync();
