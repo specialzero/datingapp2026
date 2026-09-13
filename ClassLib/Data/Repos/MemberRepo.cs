@@ -17,6 +17,13 @@ public class MemberRepo(DatingDbContext _dbcontext) : IMemberRepo
         return await _dbcontext.Members.ToListAsync();
     }
 
+    public async Task<Member?> GetMemberForUpdate(string id)
+    {
+        return await _dbcontext.Members
+            .Include(x => x.User)
+            .SingleOrDefaultAsync(x => x.Id == id);
+    }
+
     public async Task<IReadOnlyList<Photo>> GetPhotosForMemberAsync(string memberId)
     {
         return await _dbcontext.Members
